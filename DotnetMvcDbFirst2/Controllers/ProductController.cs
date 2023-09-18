@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -112,6 +113,13 @@ namespace DotnetMvcDbFirst2.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult storedp(string val)
+        {
+            var c = db.Product_SearchProductName(val).ToList();
+
             return RedirectToAction("Index");
         }
 

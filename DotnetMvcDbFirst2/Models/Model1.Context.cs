@@ -12,6 +12,8 @@ namespace DotnetMvcDbFirst2.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DotnetMvcDbFirstEntities : DbContext
     {
@@ -26,5 +28,14 @@ namespace DotnetMvcDbFirst2.Models
         }
     
         public virtual DbSet<Product> Products { get; set; }
+    
+        public virtual ObjectResult<Product_SearchProductName_Result> Product_SearchProductName(string productName)
+        {
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product_SearchProductName_Result>("Product_SearchProductName", productNameParameter);
+        }
     }
 }

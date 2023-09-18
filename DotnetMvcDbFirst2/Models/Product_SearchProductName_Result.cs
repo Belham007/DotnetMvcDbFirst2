@@ -10,9 +10,8 @@
 namespace DotnetMvcDbFirst2.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Product_SearchProductName_Result
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
